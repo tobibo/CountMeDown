@@ -33,9 +33,7 @@ import com.example.androiddevchallenge.AppViewModel
 import com.example.androiddevchallenge.ui.keyboard.KeyboardConverter
 import com.example.androiddevchallenge.ui.keyboard.KeyboardWithDisplay
 import com.example.androiddevchallenge.ui.theme.MyTheme
-import org.joda.time.DateTime
 import org.joda.time.Duration
-import org.joda.time.LocalTime
 
 @Preview("DIGIT InPUT")
 @Composable

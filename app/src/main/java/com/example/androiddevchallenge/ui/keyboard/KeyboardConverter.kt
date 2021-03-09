@@ -43,11 +43,9 @@ class KeyboardConverter {
 
             val seconds = biggerSeconds + smallerSeconds
 
-
             val smallerMinutes = digits[2]
             val biggerMinutes = digits[3] * MINUTES_MULTIPLIER
             val minutes = biggerMinutes + smallerMinutes
-
 
             val smallerHours = digits[4]
             val biggerHours = digits[5] * HOURS_MULTIPLIER
