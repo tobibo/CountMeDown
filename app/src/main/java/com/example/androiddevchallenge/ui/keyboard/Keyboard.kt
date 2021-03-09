@@ -51,7 +51,7 @@ fun Key() {
 
 @Composable
 fun KeyboardKey(key: Int, onClicked: (Int) -> Unit, modifier: Modifier = Modifier) {
-    Box(modifier = Modifier.padding(6.dp)) {
+    Box(modifier = modifier.padding(6.dp)) {
         Button(onClick = { onClicked(key) }) {
             Text(text = "$key", style = MaterialTheme.typography.h4)
         }
@@ -212,7 +212,7 @@ fun Keyboard(
                 }
                 KeyboardKey(0, onDigitClicked)
 
-                KeyboardKey(0, onDigitClicked, modifier = Modifier.alpha(1f))
+                KeyboardKey(0, onDigitClicked, modifier = Modifier.alpha(0f))
             }
         }
     }
