@@ -15,7 +15,7 @@
  */
 package com.example.androiddevchallenge.ui.keyboard
 
-import java.time.LocalTime
+import org.joda.time.Duration
 import java.util.concurrent.TimeUnit
 
 class KeyboardConverter {
@@ -26,41 +26,42 @@ class KeyboardConverter {
         const val MINUTES_MULTIPLIER = 10
         const val HOURS_MULTIPLIER = 10
 
-        fun transformTimeToDigits(localTime: LocalTime): List<Int> {
+        fun transformTimeToDigits(localTime: Duration): List<Int> {
             return mutableListOf<Int>().apply {
-                add(0, localTime.second % SECONDS_MULTIPLIER)
-                add(1, localTime.second / SECONDS_MULTIPLIER)
-                add(2, localTime.minute % MINUTES_MULTIPLIER)
-                add(3, localTime.minute / MINUTES_MULTIPLIER)
-                add(4, localTime.hour % HOURS_MULTIPLIER)
-                add(5, localTime.hour / HOURS_MULTIPLIER)
+                add(0, (localTime.standardSeconds % SECONDS_MULTIPLIER).toInt())
+                add(1, (localTime.standardSeconds / SECONDS_MULTIPLIER).toInt())
+                add(2, (localTime.standardMinutes % MINUTES_MULTIPLIER).toInt())
+                add(3, (localTime.standardMinutes / MINUTES_MULTIPLIER).toInt())
+                add(4, (localTime.standardHours % HOURS_MULTIPLIER).toInt())
+                add(5, (localTime.standardHours / HOURS_MULTIPLIER).toInt())
             }.toList()
         }
 
-        fun getTime(digits: MutableList<Int>): LocalTime {
+        fun getTime(digits: MutableList<Int>): Duration {
             val smallerSeconds = digits[0]
             val biggerSeconds = digits[1] * SECONDS_MULTIPLIER
+
             val seconds = biggerSeconds + smallerSeconds
-            val remainingSeconds = seconds % SECONDS_DIVIDER
-            val dividedSeconds = seconds / SECONDS_DIVIDER
+
 
             val smallerMinutes = digits[2]
             val biggerMinutes = digits[3] * MINUTES_MULTIPLIER
-            val minutes = biggerMinutes + smallerMinutes + dividedSeconds
-            val remainingMinutes = minutes % MINUTES_DIVIDER
-            val dividedMinutes = minutes / MINUTES_DIVIDER
+            val minutes = biggerMinutes + smallerMinutes
+
 
             val smallerHours = digits[4]
             val biggerHours = digits[5] * HOURS_MULTIPLIER
-            val hours = biggerHours + smallerHours + dividedMinutes
+            val hours = biggerHours + smallerHours
 
-            return LocalTime.of(hours, remainingMinutes, remainingSeconds)
+            var duration = Duration(0).plus(TimeUnit.SECONDS.toMillis(seconds.toLong()))
+                .plus(TimeUnit.MINUTES.toMillis(minutes.toLong()))
+                .plus(TimeUnit.HOURS.toMillis(hours.toLong()))
+
+            return duration
         }
 
-        fun getTimeInMilliseconds(currentTime: LocalTime): Long {
-            return TimeUnit.HOURS.toMillis(currentTime.hour.toLong()) +
-                TimeUnit.MINUTES.toMillis(currentTime.minute.toLong()) +
-                TimeUnit.SECONDS.toMillis(currentTime.second.toLong())
+        fun getTimeInMilliseconds(currentTime: Duration): Long {
+            return currentTime.millis
         }
     }
 }

@@ -81,8 +81,8 @@ class SimpleCountDownTimer(
 
         val minuteString = minutes.toString()
         if (minuteString.length > 1) {
-            _minuteDigit1.value = minuteString[1].digitToInt()
-            _minuteDigit0.value = minuteString[0].digitToInt()
+            _minuteDigit1.value = minuteString[0].digitToInt()
+            _minuteDigit0.value = minuteString[1].digitToInt()
         } else {
             _minuteDigit0.value = minuteString[0].digitToInt()
             _minuteDigit1.value = 0

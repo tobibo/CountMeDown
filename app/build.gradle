@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.androiddevchallenge"
-        minSdkVersion 26
+        minSdkVersion 23
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -78,6 +78,7 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout-compose:1.0.0-alpha03"
     implementation "androidx.navigation:navigation-compose:1.0.0-alpha08"
     implementation 'com.afollestad.material-dialogs:datetime:3.2.1'
+    implementation 'net.danlew:android.joda:2.10.9.1'
 
     // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
     implementation "androidx.compose.foundation:foundation:$compose_version"

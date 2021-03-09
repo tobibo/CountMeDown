@@ -33,7 +33,9 @@ import com.example.androiddevchallenge.AppViewModel
 import com.example.androiddevchallenge.ui.keyboard.KeyboardConverter
 import com.example.androiddevchallenge.ui.keyboard.KeyboardWithDisplay
 import com.example.androiddevchallenge.ui.theme.MyTheme
-import java.time.LocalTime
+import org.joda.time.DateTime
+import org.joda.time.Duration
+import org.joda.time.LocalTime
 
 @Preview("DIGIT InPUT")
 @Composable
@@ -52,7 +54,7 @@ fun AddTimer(appViewModel: AppViewModel, showTimers: () -> Unit) {
         verticalArrangement = Arrangement.Center
     ) {
 
-        var currentTime by remember { mutableStateOf(LocalTime.of(0, 0, 0)) }
+        var currentTime by remember { mutableStateOf(Duration(0)) }
         Text("Add a timer", style = MaterialTheme.typography.h2)
         KeyboardWithDisplay {
             currentTime = KeyboardConverter.getTime(it)
